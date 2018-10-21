@@ -1,11 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import CharacterItem from "components/Character/Item";
 import Section from "components/Section";
 import Playground from "components/Playground";
 import { Motion, spring } from "react-motion";
 import { getCharacters, getSelected } from "selectors";
-import CharacterItem from "components/Character/Item";
 
 const StyledTitle = styled.h2`
   margin-bottom: 3rem;
@@ -14,7 +14,6 @@ const StyledTitle = styled.h2`
 `;
 
 function SimpleMotion({ characters, selected }) {
-  console.log("selected", selected, "characters", characters);
   return (
     <Section id={"motion"}>
       <StyledTitle>{"<Motion />"}</StyledTitle>
@@ -27,19 +26,15 @@ function SimpleMotion({ characters, selected }) {
               defaultStyle={{
                 scale: 0.825,
                 opacity: 0,
-                zIndex: 1,
-                counter: 0
+                zIndex: 1
               }}
               style={{
                 opacity: spring(isSelected ? 1 : 0),
                 scale: spring(isSelected ? 1 : 0.825, { stiffness: 112, damping: 13 }),
-                zIndex: isSelected ? 1 : 0,
-                counter: spring(isSelected ? character.strength : 0, { stiffness: 90, damping: 26, precision: 1.0 })
+                zIndex: isSelected ? 1 : 0
               }}
             >
-              {interpolatedStyles => (
-                <CharacterItem interpolatedStyles={interpolatedStyles} isSelected character={character} />
-              )}
+              {styles => <CharacterItem interpolatedStyles={styles} isSelected={isSelected} character={character} />}
             </Motion>
           );
         })}

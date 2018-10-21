@@ -1,8 +1,16 @@
 import React from "react";
 import { Motion, spring } from "react-motion";
 import styled from "styled-components";
+import Picture from "./Picture";
+import Name from "./Name";
 
-const StyledCharacter = styled.div`
+const StyledCharacter = styled.div.attrs({
+  style: ({ opacity, zIndex }) => ({
+    opacity,
+    zIndex,
+    display: opacity > 0 ? "flex" : "none"
+  })
+})`
   position: absolute;
   left: 0;
   top: 0;
@@ -12,14 +20,11 @@ const StyledCharacter = styled.div`
   flex-flow: column wrap;
   justify-content: center;
   align-items: center;
-  opacity: ${({ opacity }) => opacity}
-  z-index: ${({ zIndex }) => zIndex}
-  display: ${({ opacity }) => (opacity > 0 ? "flex" : "none")}
 `;
 
 export default function CharacterItem({ interpolatedStyles: styles, isSelected, character }) {
   return (
-    <StyledCharacter opacity={styles.opacity} zIndex={styles.zIndex}>
+    <StyledCharacter {...styles}>
       <Motion
         defaultStyle={{
           opacity: 0,
@@ -30,34 +35,16 @@ export default function CharacterItem({ interpolatedStyles: styles, isSelected, 
           x: spring(styles.opacity >= 0.825 ? 0 : !isSelected && styles.opacity > 0 ? -80 : 80)
         }}
       >
-        {style => {
-          return (
-            <h2
-              style={{
-                zIndex: 0,
-                fontSize: "13rem",
-                position: "absolute",
-                left: "-100%",
-                top: "38%",
-                marginTop: 0,
-                opacity: style.opacity,
-                transform: `translateX(${style.x}px)`,
-                color: character.color
-              }}
-            >
-              {character.name.charAt(0).toUpperCase() + character.name.slice(1)}
-            </h2>
-          );
-        }}
+        {style => <Name name={character.name} {...style} color={character.color} />}
       </Motion>
       <Motion
         defaultStyle={{
           opacity: 0,
-          bottom: -120
+          bottom: 100
         }}
         style={{
           opacity: spring(styles.opacity >= 1 ? 1 : 0),
-          bottom: spring(styles.opacity >= 0.5 ? -150 : !isSelected && styles.opacity > 0 ? -180 : -120, {
+          bottom: spring(styles.opacity >= 0.5 ? 70 : !isSelected && styles.opacity > 0 ? 30 : 100, {
             stiffness: 112,
             damping: 13
           })
@@ -111,18 +98,7 @@ export default function CharacterItem({ interpolatedStyles: styles, isSelected, 
           );
         }}
       </Motion>
-      <img
-        src={character.picture}
-        alt={character.id}
-        style={{
-          position: "absolute",
-          top: "2rem",
-          transform: `scale(${styles.scale})`,
-          maxWidth: "75%",
-          maxHeight: "58%",
-          zIndex: 1
-        }}
-      />
+      <Picture picture={character.picture} id={character.id} scale={styles.scale} />
     </StyledCharacter>
   );
 }
