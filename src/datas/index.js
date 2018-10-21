@@ -8,49 +8,49 @@ import yamcha from "./../assets/images/Yamcha.png";
 
 const characters = [
   {
-    id: 0,
+    id: 1,
     picture: chaozu,
     name: "chaozu",
     strength: 250,
     color: "#097b01"
   },
   {
-    id: 1,
+    id: 2,
     picture: chichi,
     name: "chichi",
     strength: 114,
     color: "rgb(255, 36, 89)"
   },
   {
-    id: 2,
+    id: 3,
     picture: krilin,
     name: "krilin",
     strength: 340,
     color: "#ff5a00"
   },
   {
-    id: 3,
+    id: 4,
     picture: piccolo,
     name: "piccolo",
     strength: 416,
     color: "#409b00"
   },
   {
-    id: 4,
+    id: 5,
     picture: tenshinan,
     name: "tenshinan",
     strength: 325,
     color: "#642872"
   },
   {
-    id: 5,
+    id: 6,
     picture: yamcha,
     name: "yamcha",
     strength: 315,
     color: "#dd1e00"
   },
   {
-    id: 6,
+    id: 7,
     picture: sangoku,
     name: "sangoku",
     strength: 422,

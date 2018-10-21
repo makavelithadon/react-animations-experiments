@@ -1,17 +1,25 @@
 import React from "react";
 import styled from "styled-components";
-import { NavLink, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
+import { NavHashLink as NavLink } from "react-router-hash-link";
+import routes from "routes";
 
 const StyleList = styled.ul`
   padding: 0;
   margin: 0;
 `;
 
-const StyledListItem = styled.li`
-  list-style-type: none;
-  font-size: 1.6rem;
+const StyledCommonListItems = styled.li`
   margin-top: 7px;
-  margin-bottom: 16px;
+  list-style-type: none;
+`;
+
+const StyledListItem = styled(StyledCommonListItems)`
+  margin-top: 7px;
+`;
+
+const StyledSubListItem = styled(StyledCommonListItems)`
+  margin-bottom: 7px;
 `;
 
 const StyledCommonLinks = styled(NavLink)`
@@ -22,13 +30,17 @@ const StyledCommonLinks = styled(NavLink)`
   color: rgba(0, 0, 0, 0.825);
   border-radius: 5px;
   transition: 0.125s ease-out;
-  &:hover {
+  &:hover:not(.active) {
     background-color: #f2f2f2;
   }
 `;
 
 const StyledLink = styled(StyledCommonLinks)`
+  font-size: 1.6rem;
   font-weight: 500;
+  &.active {
+    color: deepskyblue;
+  }
 `;
 
 const StyledSubLink = styled(StyledCommonLinks)`
@@ -40,27 +52,28 @@ export default function Nav() {
     <>
       <h2>Librairies</h2>
       <nav>
-        <StyledListItem>
-          <StyledLink to={"/react-motion"}>React-Motion</StyledLink>
-          <Route
-            path={"/react-motion"}
-            render={() => (
-              <StyleList>
-                <StyledListItem style={{ paddingLeft: 12 }}>
-                  <StyledSubLink to={"/react-motion#motion"}>
-                    <code>{"<Motion />"}</code>
-                  </StyledSubLink>
-                </StyledListItem>
-              </StyleList>
-            )}
-          />
-        </StyledListItem>
-        <StyledListItem>
-          <StyledLink to={"/react-pose"}>Pose</StyledLink>
-        </StyledListItem>
-        <StyledListItem>
-          <StyledLink to={"/react-spring"}>React Spring</StyledLink>
-        </StyledListItem>
+        {routes.map(route => (
+          <StyledListItem key={route.path}>
+            <StyledLink to={route.path}>{route.name}</StyledLink>
+            {route.subRoutes &&
+              route.subRoutes.length && (
+                <Route
+                  path={route.path}
+                  render={() =>
+                    route.subRoutes.map(subRoute => (
+                      <StyleList key={subRoute.path}>
+                        <StyledSubListItem style={{ paddingLeft: 12 }}>
+                          <StyledSubLink smooth to={subRoute.path}>
+                            <code>{subRoute.name}</code>
+                          </StyledSubLink>
+                        </StyledSubListItem>
+                      </StyleList>
+                    ))
+                  }
+                />
+              )}
+          </StyledListItem>
+        ))}
       </nav>
     </>
   );

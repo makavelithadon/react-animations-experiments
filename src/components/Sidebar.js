@@ -3,10 +3,18 @@ import styled from "styled-components";
 import Nav from "./Nav";
 
 const StyledSidebar = styled.aside`
-  flex-basis: 300px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 300px;
   height: 100vh;
   padding: 20px;
   border-right: 1px solid #f0f0f0;
+  transition: 0.2s ease-out;
+  @media (max-width: 960px) {
+    width: 200px;
+  }
 `;
 
 const StyledNavTitle = styled.h2`

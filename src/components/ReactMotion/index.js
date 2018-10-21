@@ -1,7 +1,8 @@
 import React from "react";
-import Motion from "./Motion";
+import Motion from "containers/ReactMotion/Motion";
+import TransitionMotion from "./TransitionMotion";
 import styled from "styled-components";
-import Section from "./../Section";
+import Section from "components/Section";
 
 const StyledTitle = styled.h2`
   margin-bottom: 2.2rem;
@@ -24,17 +25,21 @@ const StyledRepository = styled.a`
   }
 `;
 
-export default function ReactMotion({ location: { pathname } }) {
+export default function ReactMotion() {
   return (
     <>
       <Section>
         <StyledTitle>React Motion</StyledTitle>
         <StyledAbout>A spring that solves your animation problems.</StyledAbout>
         <StyledRepository target={"_blank"} href={"https://github.com/chenglou/react-motion"}>
-          👀 https://github.com/chenglou/react-motion
+          <span role={"img"} aria-label={"Goto Emoji"}>
+            👀
+          </span>{" "}
+          https://github.com/chenglou/react-motion
         </StyledRepository>
       </Section>
       <Motion />
+      <TransitionMotion />
     </>
   );
 }

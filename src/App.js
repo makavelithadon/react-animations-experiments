@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import Sidebar from "./components/Sidebar";
-import Main from "./components/Main";
+import Sidebar from "components/Sidebar";
+import Main from "components/Main";
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -19,8 +19,9 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const StyledApp = styled.main`
+  position: relative;
   display: flex;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
 `;
 

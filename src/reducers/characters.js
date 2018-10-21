@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import { SET_SELECTED } from "./../types";
-import characters from "./../datas";
+import { SET_SELECTED } from "types";
+import characters from "datas";
 
 function selected(state = characters[0], action) {
   switch (action.type) {
@@ -11,11 +11,11 @@ function selected(state = characters[0], action) {
   }
 }
 
-function characters(state = characters, action) {
+function items(state = characters, action) {
   return characters;
 }
 
 export default combineReducers({
-  characters,
+  items,
   selected
 });
