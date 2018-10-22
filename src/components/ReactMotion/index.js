@@ -1,11 +1,11 @@
 import React from "react";
-import Motion from "containers/ReactMotion/Motion";
-import TransitionMotion from "./TransitionMotion";
 import styled from "styled-components";
 import Section from "components/Section";
+import routes from "routes";
+import { normalizeRoutePath } from "utils";
 
 const StyledTitle = styled.h2`
-  margin-bottom: 2.2rem;
+  margin-bottom: 1.8rem;
   font-size: 1.8rem;
   color: rgba(0, 0, 0, 0.825);
 `;
@@ -25,7 +25,7 @@ const StyledRepository = styled.a`
   }
 `;
 
-export default function ReactMotion() {
+export default function ReactMotion({ location: { pathname } }) {
   return (
     <>
       <Section>
@@ -38,8 +38,11 @@ export default function ReactMotion() {
           https://github.com/chenglou/react-motion
         </StyledRepository>
       </Section>
-      <Motion />
-      <TransitionMotion />
+      {routes
+        .find(route => normalizeRoutePath(route.path) === normalizeRoutePath(pathname))
+        .subRoutes.map(({ component: Component, path }) => (
+          <Component key={path} />
+        ))}
     </>
   );
 }

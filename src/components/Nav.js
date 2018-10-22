@@ -52,7 +52,7 @@ export default function Nav() {
     <>
       <h2>Librairies</h2>
       <nav>
-        {routes.map(route => (
+        {routes.filter(route => route.path !== "/").map(route => (
           <StyledListItem key={route.path}>
             <StyledLink to={route.path}>{route.name}</StyledLink>
             {route.subRoutes &&

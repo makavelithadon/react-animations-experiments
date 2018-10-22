@@ -1,4 +1,4 @@
-import { SET_SELECTED } from "types";
+import { SET_SELECTED, SET_MOBILE_SIDEBAR_VISIBILITY } from "types";
 
 export const goTo = dispatch => (characters, selected, action) => {
   const currentIndex = characters.findIndex(c => c.id === selected.id);
@@ -10,6 +10,13 @@ export const goTo = dispatch => (characters, selected, action) => {
   }
   dispatch(setSelected(newSelected));
 };
+
+export const toggleMobileSidebar = dispatch => visibility => dispatch(setMobileSidebarVisibility(visibility));
+
+const setMobileSidebarVisibility = visibility => ({
+  type: SET_MOBILE_SIDEBAR_VISIBILITY,
+  visibility
+});
 
 const setSelected = newOne => ({
   type: SET_SELECTED,

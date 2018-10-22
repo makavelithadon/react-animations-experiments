@@ -22,7 +22,6 @@ const StyledApp = styled.main`
   position: relative;
   display: flex;
   width: 100%;
-  height: 100vh;
 `;
 
 class App extends Component {

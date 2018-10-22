@@ -1,25 +1,30 @@
+import Home from "components/Home/index";
 import ReactMotion from "components/ReactMotion";
 import Motion from "containers/ReactMotion/Motion";
-import TransitionMotion from "components/ReactMotion/TransitionMotion";
 import ReactPose from "components/ReactPose";
 import ReactSpring from "components/ReactSpring";
 
 export default [
+  {
+    path: "/",
+    name: "Home",
+    component: Home
+  },
   {
     path: "/react-motion",
     name: "ReactMotion",
     component: ReactMotion,
     subRoutes: [
       {
-        path: "react-motion#motion",
+        path: "/react-motion#motion",
         name: "<Motion />",
         component: Motion
-      },
-      {
-        path: "react-motion#transition-motion",
+      }
+      /* {
+        path: "/react-motion#transition-motion",
         name: "<TransitionMotion />",
         component: TransitionMotion
-      }
+      } */
     ]
   },
   {

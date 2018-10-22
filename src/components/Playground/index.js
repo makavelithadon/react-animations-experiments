@@ -13,20 +13,21 @@ const StyledPlayground = styled.div`
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  border: 1px solid #f0f0f0;
 `;
 
 function Playground({ children, characters, selected, goTo }) {
   return (
     <StyledPlayground>
       <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flex: 1 }}>
-        <Button controls onClick={() => goTo(characters, selected, "previous")}>
+        <Button primary controls onClick={() => goTo(characters, selected, "previous")}>
           Previous
         </Button>
-        <Button controls onClick={() => goTo(characters, selected, "next")}>
+        <Button primary controls onClick={() => goTo(characters, selected, "next")}>
           Next
         </Button>
       </div>
-      <div style={{ position: "relative", flex: 6 }}>{children /* (characters, selected) */}</div>
+      <div style={{ position: "relative", flex: 6 }}>{children(characters, selected)}</div>
     </StyledPlayground>
   );
 }

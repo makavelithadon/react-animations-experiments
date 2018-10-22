@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledControlButton = styled.button`
-  border: 1px solid #acacac;
-  color: #acacac;
+  border: ${props => `1px solid ${props.primary ? "deepskyblue" : "#acacac"};`}
+  color: ${props => (props.primary ? "deepskyblue" : "#acacac")}
   border-radius: 3px;
   background-color: #fff;
   padding: 0.9rem 1.4rem;
@@ -14,7 +14,9 @@ const StyledControlButton = styled.button`
   margin-right: 7px;
   transition: 0.2s ease-out;
   &:hover {
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    color: #fff;
+    background-color: deepskyblue;
   }
 `;
 
