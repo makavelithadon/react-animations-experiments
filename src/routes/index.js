@@ -1,6 +1,6 @@
 import Home from "components/Home/index";
 import ReactMotion from "components/ReactMotion";
-import Motion from "containers/ReactMotion/Motion";
+import Motion from "components/ReactMotion/Motion";
 import ReactPose from "components/ReactPose";
 import ReactSpring from "components/ReactSpring";
 
@@ -16,7 +16,7 @@ export default [
     component: ReactMotion,
     subRoutes: [
       {
-        path: "/react-motion#motion",
+        path: "#motion",
         name: "<Motion />",
         component: Motion
       }

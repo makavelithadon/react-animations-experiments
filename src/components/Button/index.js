@@ -2,11 +2,29 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledControlButton = styled.button`
-  border: ${props => `1px solid ${props.primary ? "deepskyblue" : "#acacac"};`}
-  color: ${props => (props.primary ? "deepskyblue" : "#acacac")}
+  border: ${({ color, theme, type }) => {
+    if (type === "outlined") {
+      return `1px solid ${theme.colors[color] || theme.colors.black}`;
+    } else {
+      return "1px solid transparent";
+    }
+  }};
+  color: ${({ color, theme, type }) => {
+    if (type === "outlined") {
+      return theme.colors[color] || theme.colors.black;
+    } else {
+      return theme.colors.white;
+    }
+  }}};
   border-radius: 3px;
-  background-color: #fff;
-  padding: 0.9rem 1.4rem;
+  background-color: ${({ color, theme, type }) => {
+    if (type === "outlined") {
+      return theme.colors.white;
+    } else {
+      return theme.colors[color] || theme.colors.black;
+    }
+  }};
+  padding: 0.8rem 1.4rem;
   text-transform: capitalize;
   outline: 0;
   outline-offset: 0;
@@ -16,22 +34,19 @@ const StyledControlButton = styled.button`
   &:hover {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     color: #fff;
-    background-color: deepskyblue;
-  }
+    background-color: ${({ color, theme, type }) => {
+      if (type === "outlined") {
+        return theme.colors[color] || theme.colors.black;
+      }
+    }};
+  },
 `;
 
 export default function Button(props) {
-  if (props.controls) {
-    return (
-      <StyledControlButton {...props}>
-        <code>{props.children}</code>
-      </StyledControlButton>
-    );
-  }
   return (
-    <button {...props}>
+    <StyledControlButton {...props}>
       <code>{props.children}</code>
-    </button>
+    </StyledControlButton>
   );
 }
 

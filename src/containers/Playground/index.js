@@ -20,10 +20,10 @@ function Playground({ children, characters, selected, goTo }) {
   return (
     <StyledPlayground>
       <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flex: 1 }}>
-        <Button primary controls onClick={() => goTo(characters, selected, "previous")}>
+        <Button color={"secondary"} type={"outlined"} controls onClick={() => goTo(characters, selected, "previous")}>
           Previous
         </Button>
-        <Button primary controls onClick={() => goTo(characters, selected, "next")}>
+        <Button color={"secondary"} type={"outlined"} controls onClick={() => goTo(characters, selected, "next")}>
           Next
         </Button>
       </div>

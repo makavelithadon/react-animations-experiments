@@ -1,10 +1,11 @@
-import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 import Nav from "./Nav";
 import { Link } from "react-router-dom";
 import { isVisibleMobileSidebar } from "selectors";
+import { toggleMobileSidebar } from "actions";
 
 const StyledCommonSidebar = styled.aside`
   position: fixed;
@@ -30,10 +31,11 @@ const StyledSidebar = styled(StyledCommonSidebar)`
 `;
 
 const StyledMobileSidebar = styled(StyledCommonSidebar)`
-  width: 200px;
+  width: 250px;
   transform: ${({ show }) => `translateX(${show ? 0 : -300}px)`};
   z-index: 100;
   box-shadow: ${({ show }) => (show ? `1px 0 10px rgba(0, 0, 0, 0.2)` : "none")};
+  pointer-events: ${({ show }) => (show ? "auto" : "none")};
 `;
 
 const StyledNavTitle = styled(Link)`
@@ -50,23 +52,39 @@ const StyledNavTitle = styled(Link)`
   }
 `;
 
-function Sidebar({ show }) {
-  return (
-    <>
-      <StyledSidebar>
-        <StyledNavTitle to={"/"}>React Animations Experiments</StyledNavTitle>
-        <Nav />
-      </StyledSidebar>
-      <StyledMobileSidebar show={show}>
-        <StyledNavTitle to={"/"}>React Animations Experiments</StyledNavTitle>
-        <Nav />
-      </StyledMobileSidebar>
-    </>
-  );
+class Sidebar extends Component {
+  render() {
+    const { show, toggleMobileSidebar } = this.props;
+    return (
+      <>
+        <StyledSidebar>
+          <StyledNavTitle to={"/"} onClick={() => toggleMobileSidebar(false)}>
+            <h2>React Animations Experiments</h2>
+          </StyledNavTitle>
+          <Nav />
+        </StyledSidebar>
+        <StyledMobileSidebar show={show}>
+          <StyledNavTitle to={"/"} onClick={() => toggleMobileSidebar(false)}>
+            React Animations Experiments
+          </StyledNavTitle>
+          <Nav onNavigation={() => toggleMobileSidebar(false)} />
+        </StyledMobileSidebar>
+      </>
+    );
+  }
 }
 
 const mapStateToProps = state => ({
   show: isVisibleMobileSidebar(state)
 });
 
-export default withRouter(connect(mapStateToProps)(Sidebar));
+const mapDispatchToProps = dispatch => ({
+  toggleMobileSidebar: toggleMobileSidebar(dispatch)
+});
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Sidebar)
+);

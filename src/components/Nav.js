@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Route } from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
 import { NavHashLink as NavLink } from "react-router-hash-link";
 import routes from "routes";
 
@@ -45,16 +45,25 @@ const StyledLink = styled(StyledCommonLinks)`
 
 const StyledSubLink = styled(StyledCommonLinks)`
   font-size: 1.2rem;
+  &.active {
+    color: ${({ theme }) => theme.colors.primary};
+  }
 `;
 
-export default function Nav() {
+function Nav({ location: { pathname, hash }, onNavigation }) {
+  let linkProps = {};
+  if (onNavigation && typeof onNavigation === "function") {
+    linkProps = { ...linkProps, onClick: onNavigation };
+  }
   return (
     <>
       <h2>Librairies</h2>
       <nav>
         {routes.filter(route => route.path !== "/").map(route => (
           <StyledListItem key={route.path}>
-            <StyledLink to={route.path}>{route.name}</StyledLink>
+            <StyledLink to={route.path} {...linkProps}>
+              {route.name}
+            </StyledLink>
             {route.subRoutes &&
               route.subRoutes.length && (
                 <Route
@@ -63,7 +72,12 @@ export default function Nav() {
                     route.subRoutes.map(subRoute => (
                       <StyleList key={subRoute.path}>
                         <StyledSubListItem style={{ paddingLeft: 12 }}>
-                          <StyledSubLink smooth to={subRoute.path}>
+                          <StyledSubLink
+                            smooth
+                            to={`${route.path}${subRoute.path}`}
+                            className={`${pathname}${hash}`.includes(subRoute.path) ? "active" : ""}
+                            {...linkProps}
+                          >
                             <code>{subRoute.name}</code>
                           </StyledSubLink>
                         </StyledSubListItem>
@@ -78,3 +92,5 @@ export default function Nav() {
     </>
   );
 }
+
+export default withRouter(Nav);
