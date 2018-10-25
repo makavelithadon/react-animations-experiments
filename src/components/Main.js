@@ -1,4 +1,4 @@
-import React, { Component, createRef } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { Route, Switch, withRouter } from "react-router-dom";
@@ -49,30 +49,20 @@ const StyledNavBar = styled.header`
   }
 `;
 
-class Main extends Component {
-  mainNode = createRef();
-  componentDidUpdate(prevProps) {
-    const routeHasChanged = this.props.location.key !== prevProps.location.key;
-    if (routeHasChanged && !this.props.location.hash) {
-      this.mainNode.current.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  }
-  render() {
-    const { isVisibleMobileSidebar: show, toggleMobileSidebar } = this.props;
-    return (
-      <StyledMain ref={this.mainNode}>
-        <StyledNavBar>
-          <Burger type={"collapse"} isActive={show} onClick={() => toggleMobileSidebar(!show)} />
-        </StyledNavBar>
-        <Backdrop show={show} clicked={() => toggleMobileSidebar(false)} />
-        <Switch>
-          {routes.reduce(flattenRoutes, []).map(route => (
-            <Route exact={route.path === "/"} key={route.path} path={route.path} component={route.component} />
-          ))}
-        </Switch>
-      </StyledMain>
-    );
-  }
+function Main({ isVisibleMobileSidebar: show, toggleMobileSidebar }) {
+  return (
+    <StyledMain>
+      <StyledNavBar>
+        <Burger type={"collapse"} isActive={show} onClick={() => toggleMobileSidebar(!show)} />
+      </StyledNavBar>
+      <Backdrop show={show} clicked={() => toggleMobileSidebar(false)} />
+      <Switch>
+        {routes.reduce(flattenRoutes, []).map(route => (
+          <Route exact={route.path === "/"} key={route.path} path={route.path} component={route.component} />
+        ))}
+      </Switch>
+    </StyledMain>
+  );
 }
 
 const mapStateToProps = state => ({

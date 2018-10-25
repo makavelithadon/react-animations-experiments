@@ -21,7 +21,8 @@ function Playground({ controls, customControls, children, characters, selected, 
     <StyledPlayground>
       {(!!controls || !!customControls) && (
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flex: 1 }}>
-          {!customControls ? (
+          {customControls && customControls}
+          {controls && (
             <>
               <Button color={"secondary"} type={"outlined"} onClick={() => goTo(characters, selected, "previous")}>
                 Previous
@@ -30,12 +31,12 @@ function Playground({ controls, customControls, children, characters, selected, 
                 Next
               </Button>
             </>
-          ) : (
-            customControls
           )}
         </div>
       )}
-      <div style={{ position: "relative", flex: 6 }}>{children(characters, selected)}</div>
+      <div style={{ position: "relative", flex: 6 }}>
+        {children && (typeof children === "function" ? children(characters, selected) : children)}
+      </div>
     </StyledPlayground>
   );
 }
