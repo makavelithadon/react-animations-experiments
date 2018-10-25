@@ -1,4 +1,4 @@
-import React, { Component, createRef } from "react";
+import React, { Component } from "react";
 import styled, { keyframes } from "styled-components";
 import Section from "components/Section";
 import { withRouter } from "react-router-dom";
@@ -31,22 +31,10 @@ const StyledTitle = styled.h2`
 `;
 
 class Page extends Component {
-  scrollOptions = { behavior: "smooth", block: "start" };
-  mainNode = createRef();
-  componentDidUpdate(prevProps) {
-    const routeHasChanged = this.props.location.key !== prevProps.location.key;
-    console.log('this.props.location', this.props.location);
-    if (routeHasChanged && !this.props.location.hash) {
-      this.scrollTo(this.mainNode.current);
-    }
-  }
-  scrollTo(node) {
-    node.scrollIntoView(this.scrollOptions);
-  }
   render() {
     const { title, children } = this.props;
     return (
-      <div ref={this.mainNode}>
+      <div>
         <Section>
           <StyledTitle>{title}</StyledTitle>
           {children}
