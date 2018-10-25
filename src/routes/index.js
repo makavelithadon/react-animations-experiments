@@ -3,6 +3,7 @@ import ReactMotion from "components/ReactMotion";
 import Motion from "components/ReactMotion/Motion";
 import ReactPose from "components/ReactPose";
 import ReactSpring from "components/ReactSpring";
+// import Spring from "components/ReactSpring/Spring";
 
 export default [
   {
@@ -36,5 +37,12 @@ export default [
     path: "/react-spring",
     name: "react-spring",
     component: ReactSpring
+    /* subRoutes: [
+      {
+        path: "#spring",
+        name: "<Spring>",
+        component: Spring
+      }
+    ] */
   }
 ];

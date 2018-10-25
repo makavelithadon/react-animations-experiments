@@ -16,17 +16,25 @@ const StyledPlayground = styled.div`
   border: 1px solid #f0f0f0;
 `;
 
-function Playground({ children, characters, selected, goTo }) {
+function Playground({ controls, customControls, children, characters, selected, goTo }) {
   return (
     <StyledPlayground>
-      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flex: 1 }}>
-        <Button color={"secondary"} type={"outlined"} controls onClick={() => goTo(characters, selected, "previous")}>
-          Previous
-        </Button>
-        <Button color={"secondary"} type={"outlined"} controls onClick={() => goTo(characters, selected, "next")}>
-          Next
-        </Button>
-      </div>
+      {(!!controls || !!customControls) && (
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flex: 1 }}>
+          {!customControls ? (
+            <>
+              <Button color={"secondary"} type={"outlined"} onClick={() => goTo(characters, selected, "previous")}>
+                Previous
+              </Button>
+              <Button color={"secondary"} type={"outlined"} onClick={() => goTo(characters, selected, "next")}>
+                Next
+              </Button>
+            </>
+          ) : (
+            customControls
+          )}
+        </div>
+      )}
       <div style={{ position: "relative", flex: 6 }}>{children(characters, selected)}</div>
     </StyledPlayground>
   );

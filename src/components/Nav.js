@@ -64,8 +64,8 @@ function Nav({ location: { pathname, hash }, onNavigation }) {
             <StyledLink to={route.path} {...linkProps}>
               {route.name}
             </StyledLink>
-            {route.subRoutes &&
-              route.subRoutes.length && (
+            {!!route.subRoutes &&
+              !!route.subRoutes.length && (
                 <Route
                   path={route.path}
                   render={() =>
