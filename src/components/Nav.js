@@ -24,13 +24,13 @@ const StyledSubListItem = styled(StyledCommonListItems)`
 
 const StyledCommonLinks = styled(NavLink)`
   display: inline-block;
-  padding: 0.2rem 0.425rem;
+  padding: 0.2rem 0.6rem;
   cursor: pointer;
   text-decoration: none;
   color: rgba(0, 0, 0, 0.825);
   border-radius: 5px;
   transition: 0.125s ease-out;
-  &:hover:not(.active) {
+  &:hover {
     background-color: #f2f2f2;
   }
 `;
@@ -38,16 +38,10 @@ const StyledCommonLinks = styled(NavLink)`
 const StyledLink = styled(StyledCommonLinks)`
   font-size: 1.6rem;
   font-weight: 500;
-  &.active {
-    color: deepskyblue;
-  }
 `;
 
 const StyledSubLink = styled(StyledCommonLinks)`
   font-size: 1.2rem;
-  &.active {
-    color: ${({ theme }) => theme.colors.primary};
-  }
 `;
 
 function Nav({ location: { pathname, hash }, onNavigation }) {

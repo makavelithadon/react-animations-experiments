@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Route, Switch, withRouter } from "react-router-dom";
 import routes from "routes";
 import Backdrop from "components/Backdrop";
-import Burger from "components/Burger";
+import NavBar from "components/NavBar";
 import { isVisibleMobileSidebar } from "selectors";
 import { toggleMobileSidebar } from "actions";
 import { flattenRoutes } from "utils";
@@ -14,38 +14,20 @@ const StyledMain = styled.article`
   width: calc(100vw - 300px);
   min-height: 100vh;
   margin-left: 300px;
-  padding: 20px 40px 40px;
+  padding: 20px 70px 70px;
   transition: 0.2s ease-out;
   @media (max-width: 960px) {
     width: calc(100vw - 200px);
     margin-left: 200px;
-    padding: 10px 15px 15px;
+    padding: 10px 35px 35px;
   }
   @media (max-width: 600px) {
     margin-left: 0;
     width: 100%;
     padding-top: 60px;
   }
-`;
-
-const StyledNavBar = styled.header`
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  display: none;
-  height: 60px;
-  padding: 0 40px;
-  background: ${({ theme }) => theme.colors.white};
-  border-bottom: ${({ theme }) => `1px solid ${theme.colors.lightGrey}`};
-  z-index: 1;
-  @media (max-width: 600px) {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  }
-  @media (max-width: 960px) {
-    padding: 0 15px;
+  @media (max-width: 380px) {
+    padding: 20px 14px 14px;
   }
 `;
 
@@ -54,7 +36,6 @@ class Main extends Component {
   mainNode = createRef();
   componentDidUpdate(prevProps) {
     const routeHasChanged = this.props.location.key !== prevProps.location.key;
-    console.log('this.props.location', this.props.location);
     if (routeHasChanged && !this.props.location.hash) {
       this.scrollTo(this.mainNode.current);
     }
@@ -66,9 +47,7 @@ class Main extends Component {
     const { isVisibleMobileSidebar: show, toggleMobileSidebar } = this.props;
     return (
       <StyledMain ref={this.mainNode}>
-        <StyledNavBar>
-          <Burger type={"collapse"} isActive={show} onClick={() => toggleMobileSidebar(!show)} />
-        </StyledNavBar>
+      <NavBar show={show} onClick={() => toggleMobileSidebar(!show)} />
         <Backdrop show={show} clicked={() => toggleMobileSidebar(false)} />
         <Switch>
           {routes.reduce(flattenRoutes, []).map(route => (
