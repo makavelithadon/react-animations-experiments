@@ -35,6 +35,7 @@ class Page extends Component {
   mainNode = createRef();
   componentDidUpdate(prevProps) {
     const routeHasChanged = this.props.location.key !== prevProps.location.key;
+    console.log('this.props.location', this.props.location);
     if (routeHasChanged && !this.props.location.hash) {
       this.scrollTo(this.mainNode.current);
     }

@@ -6,7 +6,7 @@ import Playground from "containers/Playground";
 import { styles as AnimationStyles } from "components/Animation/Item/index.js";
 import { styles as PictureStyles } from "components/Animation/Picture/index.js";
 import Name, { styles as NameStyles } from "components/Animation/Name/index.js";
-import { Transition, Spring, config } from "react-spring";
+import { Transition, config } from "react-spring";
 import { getSelected } from "selectors";
 import withReactSpring from "hocs/withReactSpring";
 

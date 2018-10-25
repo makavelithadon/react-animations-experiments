@@ -2,7 +2,7 @@ import React from "react";
 import Page from "components/Page/index";
 import LibraryPage from "components/Page/Library";
 
-export default function ReactMotion() {
+export default function ReactSpring() {
   return (
     <Page title={"react-spring"}>
       <LibraryPage
