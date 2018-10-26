@@ -17,12 +17,12 @@
   },
   "scripts": {
     "dev": "react-scripts start",
-    "start": "node serve.js",
+    "start": "node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "serve": "node server.js",
-    "heroku-postbuild": "yarn && yarn run build"
+    "heroku-postbuild": "npm install && npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"
