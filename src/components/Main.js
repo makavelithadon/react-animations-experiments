@@ -1,4 +1,4 @@
-import React, { Component, createRef } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { Route, Switch, withRouter } from "react-router-dom";
@@ -43,11 +43,11 @@ class Main extends Component {
   scrollTo(node) {
     node.scrollIntoView(this.scrollOptions);
   }
-  render () {
+  render() {
     const { isVisibleMobileSidebar: show, toggleMobileSidebar } = this.props;
     return (
       <StyledMain ref={this.mainNode}>
-      <NavBar show={show} onClick={() => toggleMobileSidebar(!show)} />
+        <NavBar show={show} onClick={() => toggleMobileSidebar(!show)} />
         <Backdrop show={show} clicked={() => toggleMobileSidebar(false)} />
         <Switch>
           {routes.reduce(flattenRoutes, []).map(route => (
