@@ -46,7 +46,7 @@ class SimpleSpring extends Component {
             items={items}
             keys={item => item.id}
             config={(item, type) => {
-              return type === "enter" ? { ...config.wobbly } : { ...config.gentle };
+              return type === "enter" ? { ...config.gentle } : { ...config.stiffness };
             }}
             from={{
               scale: 0.825,
@@ -88,7 +88,7 @@ class SimpleSpring extends Component {
                     }}>
                       {
                         item.friends.map(friend => (
-                          <div key={friend.id} style={{ transform: `translateY(${props.x/6}px)`, display: 'flex', justifyContent: 'space-between', flexFlow: 'column nowrap', alignItems: 'center', width: '3vw', height: '8vw', margin: '0 2vw', }}>
+                          <div key={friend.id} style={{ transform: `translateY(${props.x/3}px)`, display: 'flex', justifyContent: 'space-between', flexFlow: 'column nowrap', alignItems: 'center', width: '3vw', height: '8vw', margin: '0 2vw', }}>
                             <img src={friend.picture} alt={friend.name} style={{ height: '6vw', width:'auto' }} />
                             <div style={{ opacity: props.opacity, marginRight: 7, display: 'inline-block', color: friend.color }}>{friend.name}</div>
                           </div>
