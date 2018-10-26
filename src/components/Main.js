@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component, createRef } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { Route, Switch, withRouter } from "react-router-dom";

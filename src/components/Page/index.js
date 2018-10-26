@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import React, { Component } from "react";
-=======
-import React, { Component, createRef } from "react";
->>>>>>> 8df9ae8700d507bb05c371038fb8bea2e13fb7ae
 import styled, { keyframes } from "styled-components";
 import Section from "components/Section";
 import { withRouter } from "react-router-dom";
