@@ -43,7 +43,7 @@ function SimpleMotion() {
   return (
     <Section id={"motion"}>
       <StyledTitle>{"<Motion />"}</StyledTitle>
-      <Playground>
+      <Playground controls>
         {(characters, selected) => {
           return characters.map(character => {
             const isSelected = selected.id === character.id;

@@ -3,6 +3,8 @@ import ReactMotion from "components/ReactMotion";
 import Motion from "components/ReactMotion/Motion";
 import ReactPose from "components/ReactPose";
 import ReactSpring from "components/ReactSpring";
+import Spring from "components/ReactSpring/Spring";
+import Transition from "components/ReactSpring/Transition";
 
 export default [
   {
@@ -35,6 +37,18 @@ export default [
   {
     path: "/react-spring",
     name: "react-spring",
-    component: ReactSpring
+    component: ReactSpring,
+    subRoutes: [
+      {
+        path: "#spring",
+        name: "<Spring>",
+        component: Spring
+      },
+      {
+        path: "#transition",
+        name: "<Transition>",
+        component: Transition
+      }
+    ]
   }
 ];
