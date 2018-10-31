@@ -1,10 +1,12 @@
-import Home from "components/Home/index";
-import ReactMotion from "components/ReactMotion";
-import Motion from "components/ReactMotion/Motion";
-import ReactPose from "components/ReactPose";
-import ReactSpring from "components/ReactSpring";
-import Spring from "components/ReactSpring/Spring";
-import Transition from "components/ReactSpring/Transition";
+import { lazy } from "react";
+
+const Home = lazy(() => import("components/Home/index"));
+const ReactMotion = lazy(() => import("components/ReactMotion"));
+const Motion = lazy(() => import("components/ReactMotion/Motion"));
+const ReactPose = lazy(() => import("components/ReactPose"));
+const ReactSpring = lazy(() => import("components/ReactSpring"));
+const Spring = lazy(() => import("components/ReactSpring/Spring"));
+const Transition = lazy(() => import("components/ReactSpring/Transition"));
 
 export default [
   {

@@ -1,4 +1,4 @@
-import React, { Component, createRef } from "react";
+import React from "react";
 import styled from "styled-components";
 import Burger from "components/Burger";
 
@@ -23,7 +23,7 @@ const StyledNavBar = styled.header`
   }
 `;
 
-export default function NavBar ({ show, onClick }) {
+export default function NavBar({ show, onClick }) {
   return (
     <StyledNavBar>
       <Burger type={"collapse"} isActive={show} onClick={onClick} />

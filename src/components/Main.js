@@ -1,4 +1,4 @@
-import React, { Component, createRef } from "react";
+import React, { Suspense, Component, createRef } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { Route, Switch, withRouter } from "react-router-dom";
@@ -49,11 +49,13 @@ class Main extends Component {
       <StyledMain ref={this.mainNode}>
         <NavBar show={show} onClick={() => toggleMobileSidebar(!show)} />
         <Backdrop show={show} clicked={() => toggleMobileSidebar(false)} />
-        <Switch>
-          {routes.reduce(flattenRoutes, []).map(route => (
-            <Route exact={route.path === "/"} key={route.path} path={route.path} component={route.component} />
-          ))}
-        </Switch>
+        <Suspense fallback={"Loading page..."}>
+          <Switch>
+            {routes.reduce(flattenRoutes, []).map(({ path, component: RouteComponent }) => (
+              <Route exact={path === "/"} key={path} path={path} render={() => <RouteComponent />} />
+            ))}
+          </Switch>
+        </Suspense>
       </StyledMain>
     );
   }
